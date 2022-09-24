@@ -1,0 +1,42 @@
+.main {
+	border-radius: 20px;
+	display: grid;
+	grid-template-columns: 4fr 1fr;
+	grid-column-gap: 20px;
+	
+	
+	> section {
+		background: #dedede;
+		border-radius: 20px;
+		padding: 20px;
+		margin-bottom: 20px;
+		box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+		
+		
+		> img {
+			border-radius: 20px;
+			margin-bottom: 10px;
+			width: 100%;
+		}
+		
+		> h2 {
+			font-size: 24px;
+			font-weight: 600;
+			margin-bottom: 5px;
+		}
+	}
+	
+	> aside {
+		background: #dedede;
+		border-radius: 20px;
+		padding: 20px;
+		margin-bottom: 20px;
+		box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+		
+	}
+	
+	@media screen and (max-width: 800px) {
+		grid-template-columns: 1fr;
+	}
+}
+
