@@ -1,0 +1,41 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header {
+    position: fixed;
+    background-color: #444c5c;
+    box-shadow: 0 10px 25px 0 rgba(38, 39, 48, 0.3);
+    height: 70px;
+    color: #fff;
+    padding: 20px 0;
+    width: 100%;
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 70px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.menu-item:not(:last-child) {
+    margin-right: 70px;
+}
+
+.menu-link {
+    font-size: 17px;
+}
+
+.main {
+    height: 200vh;
+}
