@@ -36,7 +36,7 @@ const ListTodo = () => {
   return (
     <div className={styles.todos}>
       <div className={styles.todo}>
-        <h2>Todo list</h2>
+        <h2>Список дел</h2>
         <form onSubmit={submitHandler}>
           <input type='text' placeholder='Напиши свою задачу' value={value}
                  onChange={(event) => setValue(event.target.value)} />
@@ -44,7 +44,7 @@ const ListTodo = () => {
         </form>
         <div className={styles.list}>
           {todos.map((todo, index) => (
-            <p>{index + 1}. {todo}
+            <p key={index}>{index + 1}. {todo}
               <span onClick={() => deleteTodo(index)}>&#10008;</span>
             </p>
           ))}

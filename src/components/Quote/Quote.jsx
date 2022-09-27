@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import styles from './Quote.modulde.scss'
+import axios from 'axios'
 
 const apiUrl = 'https://favqs.com/api/qotd'
 
@@ -14,6 +14,7 @@ const Quote = () => {
   }, [])
   
   if (!quote) return null
+  
   
   return (
     <p className={styles}>{quote.quote.body}</p>

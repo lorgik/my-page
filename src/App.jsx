@@ -1,19 +1,24 @@
 import styles from './App.module.scss'
-import Header from './components/Header/Header'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import CardGame from './components/CardGame/CardGame'
 import Main from './components/Main/Main'
-import Footer from './components/Footer/Footer'
+import Layout from './components/Layout/Layout'
+import ListTodo from './components/TodoList/ListTodo'
 
 
 const App = () => {
   return (
-    <div className={styles.wrapper}>
-      <div>
-        <Header />
-        <Main />
+    <BrowserRouter>
+      <div className={styles.wrapper}>
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route index element={<Main />} />
+            <Route path='/todo-list' element={<ListTodo />} />
+            <Route path='/game' element={<CardGame />} />
+          </Route>
+        </Routes>
       </div>
-      
-      <Footer />
-    </div>
+    </BrowserRouter>
   )
 }
 

@@ -1,0 +1,117 @@
+.cardGame {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: #dedede;
+	border-radius: 20px;
+	padding: 20px;
+	margin: 0 auto 20px;
+	box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+	max-width: 75%;
+	width: 100%;
+	
+	.cards {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-gap: 15px;
+		max-width: 100%;
+		padding: 20px 40px;
+		width: 100%;
+		animation: show 0.3s ease-in-out;
+		
+		&.start {
+			display: grid;
+		}
+		
+		&.end {
+			display: none;
+		}
+	}
+	
+	.modalWindow {
+		
+		position: absolute;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+		width: 90%;
+		height: 90%;
+		margin: 10px auto 0;
+		background-color: #282828;
+		border-radius: 20px;
+		color: #fff;
+		font-size: 40px;
+		text-align: center;
+		box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+		gap: 40px;
+		padding: 20px;
+		animation: show 0.7s ease-in-out;
+		
+		button {
+			padding: 15px 60px;
+			border-radius: 10px;
+			font-size: 28px;
+		}
+	}
+}
+
+@keyframes show {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes hide {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.buttons {
+	background-color: #fff;
+	padding: 30px 40px;
+	border-radius: 10px;
+	box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+}
+
+button {
+	font-weight: 600;
+	transition: transform 0.2s ease-in-out;
+	user-select: none;
+	
+	&:hover {
+		transform: scale(1.05);
+	}
+}
+
+img, .hearts {
+	user-select: none;
+	pointer-events: none;
+}
+
+.hearts {
+	background-color: #fff;
+	padding: 11px 20px;
+	border-radius: 7px;
+	box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+	animation: show 0.3s ease-in-out;
+	
+	button {
+		
+	}
+}
+
+.button {
+	animation: show 0.3s ease-in-out;
+	border-radius: 7px;
+	box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+	background-color: #fff;
+}
