@@ -50,9 +50,20 @@
 		animation: show 0.7s ease-in-out;
 		
 		button {
-			padding: 15px 60px;
+			width: 100px;
+			height: 100px;
 			border-radius: 10px;
-			font-size: 28px;
+			
+			img {
+				width: 50px;
+				height: 50px;
+			}
+			
+			
+		}
+		
+		.menuBtn {
+			padding-left: 10px;
 		}
 	}
 }
@@ -76,7 +87,12 @@
 }
 
 .buttons {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 20px;
 	background-color: #fff;
+	width: 100%;
 	padding: 30px 40px;
 	border-radius: 10px;
 	box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
@@ -114,4 +130,70 @@ img, .hearts {
 	border-radius: 7px;
 	box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
 	background-color: #fff;
+}
+
+.yourTurns {
+	font-size: 26px;
+	background-color: #fff;
+	padding: 8px 20px;
+	border-radius: 7px;
+	box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+	
+}
+
+.menuSide {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	
+	
+	.button {
+		background-color: #ffcd00;
+		border-radius: 5px;
+		width: 50px;
+		height: 50px;
+		box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+		
+		
+		img {
+			margin: auto;
+		}
+	}
+	
+	.menuBtn {
+		width: 50px;
+		height: 50px;
+		background-color: #ff5757;
+		border-radius: 5px;
+		box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+		padding-left: 5px;
+		
+		img {
+			margin: auto;
+		}
+	}
+}
+
+.gameModes {
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	width: 100%;
+	padding: 30px 40px;
+	border-radius: 10px;
+	box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+	
+	.mode {
+		font-size: 40px;
+		font-weight: 600;
+		margin: 0 auto 20px;
+	}
+	
+	.modeButtons {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 20px;
+		
+	}
 }

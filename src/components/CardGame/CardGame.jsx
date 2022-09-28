@@ -1,6 +1,6 @@
 import styles from './CardGame.module.scss'
 import { useEffect, useState } from 'react'
-import SingleCard from '../SingleCard/SingleCard'
+import SingleCard from './SingleCard/SingleCard'
 
 const ARCADE_MOD = 'arcade'
 const SURVIVAL_MOD = 'survival'
@@ -27,6 +27,7 @@ const CardGame = () => {
   const [disabled, setDisabled] = useState(false)
   const [openPairs, setOpenPairs] = useState(0)
   const [life, setLife] = useState(-1)
+  const [maxLife, setMaxLife] = useState(0)
   const [hearts, setHearts] = useState([])
   const [startGame, setStartGame] = useState(false)
   const [gameMode, setGameMode] = useState('')
@@ -44,6 +45,7 @@ const CardGame = () => {
     setTurns(0)
     setStartGame(false)
     setGameMode('')
+    setLife(-1)
     setOpenPairs(0)
   }
   
@@ -96,25 +98,22 @@ const CardGame = () => {
     shuffleCards()
   }, [])
   
-  const handleClickEasy = (value) => {
-    setLife(15)
-    setStartGame(true)
-    console.log(value)
-  }
-  
-  const handleClickMedium = () => {
-    setLife(10)
+  const handleClickDifficult = () => {
     setStartGame(true)
   }
   
-  const handleClickHard = () => {
-    setLife(5)
-    setStartGame(true)
-  }
-  
-  const handleClickImpossible = () => {
-    setLife(3)
-    setStartGame(true)
+  const playAgain = () => {
+    const newShuffledCards = [...cardImages, ...cardImages]
+      .sort(() => Math.random() - 0.5)
+      .map((card) => ({
+        ...card,
+        id: Math.random()
+      }))
+    setChoiceOne(null)
+    setChoiceTwo(null)
+    setCards(newShuffledCards)
+    setOpenPairs(0)
+    setTurns(0)
   }
   
   useEffect(() => {
@@ -124,9 +123,9 @@ const CardGame = () => {
   
   useEffect(() => {
     if (life === 0 || openPairs === 8) {
+      setStartGame(false)
       setTimeout(() => {
         setGameMode('')
-        setStartGame(false)
       }, 1000)
     }
   }, [life])
@@ -141,24 +140,41 @@ const CardGame = () => {
   return (
     <div className={styles.cardGame}>
       
-      {gameMode === '' && !startGame ? <div className={`${styles.buttons} flex mt-10 gap-5 text-gray-800`}>
-        <button className='py-4 px-14 bg-blue-400 rounded text-2xl w-64'
-                onClick={() => {
-                  shuffleCards()
-                  setGameMode(ARCADE_MOD)
-                  setStartGame(true)
-                }}>АРКАДА
-        </button>
-        <button className='py-4 px-10 bg-violet-400 rounded text-2xl w-64'
-                onClick={() => {
-                  setLife(100)
-                  setGameMode(SURVIVAL_MOD)
-                }}>ВЫЖИВАНИЕ
-        </button>
-      </div> : ''}
+      {gameMode === '' && !startGame ? <>
+        <div className={styles.gameModes}>
+          <span className={styles.mode}>Режим</span>
+          <div className={styles.modeButtons}>
+            <button className='py-4 px-14 bg-blue-400 rounded text-2xl w-64'
+                    onClick={() => {
+                      shuffleCards()
+                      setGameMode(ARCADE_MOD)
+                      setStartGame(true)
+                    }}>АРКАДА
+            </button>
+            <button className='py-4 px-10 bg-violet-400 rounded text-2xl w-64'
+                    onClick={() => {
+                      setLife(100)
+                      setGameMode(SURVIVAL_MOD)
+                    }}>ВЫЖИВАНИЕ
+            </button>
+          </div>
+        </div>
+      </> : ''}
       
       {gameMode === ARCADE_MOD ? <>
         {startGame ? <>
+          <div className='mt-2 flex justify-between w-full items-center px-10'>
+            <div className={styles.yourTurns}>Ваши ходы: {turns}</div>
+            <div className={styles.menuSide}>
+              <button className={styles.button} onClick={playAgain}>
+                <img src='https://cdn-icons-png.flaticon.com/512/3106/3106716.png' alt='restart' width='30' />
+              </button>
+              <button className={styles.menuBtn} onClick={returnMenu}>
+                <img src='https://cdn-icons-png.flaticon.com/512/659/659988.png'
+                     alt='menu' width='25' />
+              </button>
+            </div>
+          </div>
           <div className={styles.cards}>
             {cards.map(card => (
               <SingleCard key={card.id} card={card} handleChoice={handleChoice}
@@ -175,9 +191,19 @@ const CardGame = () => {
                 <img alt='heart' key={index} src={heart.src} width='30' />
               ))}
             </div>
-            <button className={`${styles.button} py-3 text-xl w-36`}
-                    onClick={returnMenu}>Заново
-            </button>
+            <div className={styles.menuSide}>
+              <button className={styles.button}
+                      onClick={() => {
+                        playAgain()
+                        setLife(maxLife)
+                      }}>
+                <img src='https://cdn-icons-png.flaticon.com/512/3106/3106716.png' alt='restart' width='30' />
+              </button>
+              <button className={styles.menuBtn} onClick={returnMenu}>
+                <img src='https://cdn-icons-png.flaticon.com/512/659/659988.png'
+                     alt='menu' width='25' />
+              </button>
+            </div>
           </div>
           <div className={styles.cards}>
             {cards.map(card => (
@@ -188,16 +214,36 @@ const CardGame = () => {
           </div>
         </> : <>
           {life === 100 ? <>
-            <button className='py-3 mt-5 bg-gray-400 rounded text-xl w-36' onClick={returnMenu}>Назад</button>
-            <div className={`${styles.buttons} flex mt-10 gap-5 text-gray-800`}>
+            <div className={styles.buttons}>
               <button className='py-3 bg-green-400 rounded text-xl w-36'
-                      onClick={handleClickEasy}>ИЗИ
+                      onClick={() => {
+                        setLife(15)
+                        setMaxLife(15)
+                        handleClickDifficult()
+                      }}>ИЗИ
               </button>
-              <button className='py-3 bg-yellow-300 rounded text-xl w-36' onClick={handleClickMedium}>НОРМАЛ
+              <button className='py-3 bg-yellow-300 rounded text-xl w-36'
+                      onClick={() => {
+                        setLife(10)
+                        setMaxLife(10)
+                        handleClickDifficult()
+                      }}>НОРМАЛ
               </button>
-              <button className='py-3 bg-red-400 rounded text-xl w-36' onClick={handleClickHard}>ХАРД</button>
-              <button className='py-3 bg-red-700 rounded text-xl w-36 ' onClick={handleClickImpossible}>АД
+              <button className='py-3 bg-red-400 rounded text-xl w-36'
+                      onClick={() => {
+                        setLife(5)
+                        setMaxLife(5)
+                        handleClickDifficult()
+                      }}>ХАРД
               </button>
+              <button className='py-3 bg-red-700 rounded text-xl w-36 '
+                      onClick={() => {
+                        setLife(3)
+                        setMaxLife(3)
+                        handleClickDifficult()
+                      }}>АД
+              </button>
+              <button className='py-3 mt-5 bg-gray-400 rounded text-xl w-36' onClick={returnMenu}>Назад</button>
             </div>
           </> : ''}
         </>}
@@ -205,21 +251,49 @@ const CardGame = () => {
       
       {((openPairs === 8) && (life === -1)) && <div className={styles.modalWindow}>
         <p className='font-bold'>Вы выиграли за {turns} ходов</p>
-        <button className='bg-red-400 rounded-md py-2 px-4 '
-                onClick={returnMenu}>Новая игра
-        </button>
+        <div className={styles.menuSide}>
+          <button className={styles.button} onClick={playAgain}>
+            <img src='https://cdn-icons-png.flaticon.com/512/3106/3106716.png' alt='restart' width='30' />
+          </button>
+          <button className={styles.menuBtn} onClick={returnMenu}>
+            <img src='https://cdn-icons-png.flaticon.com/512/659/659988.png'
+                 alt='menu' width='25' />
+          </button>
+        </div>
       </div>}
       {((openPairs === 8) && (life !== -1)) && <div className={styles.modalWindow}>
         <p className='font-bold'>Вы просто победитель по жизни!</p>
-        <button className='bg-red-400 rounded-md py-2 px-4 '
-                onClick={returnMenu}>Новая игра
-        </button>
+        <div className={styles.menuSide}>
+          <button className={styles.button} onClick={() => {
+            setGameMode(SURVIVAL_MOD)
+            setStartGame(true)
+            playAgain()
+            setLife(maxLife)
+          }}>
+            <img src='https://cdn-icons-png.flaticon.com/512/3106/3106716.png' alt='restart' width='30' />
+          </button>
+          <button className={styles.menuBtn} onClick={returnMenu}>
+            <img src='https://cdn-icons-png.flaticon.com/512/659/659988.png'
+                 alt='menu' width='25' />
+          </button>
+        </div>
       </div>}
       {(life === 0) && <div className={styles.modalWindow}>
         <p className='font-bold'>Вы профукали! ХА ХА ХА</p>
-        <button className='bg-red-400 rounded-md py-2 px-4 '
-                onClick={returnMenu}>Новая игра
-        </button>
+        <div className={styles.menuSide}>
+          <button className={styles.button} onClick={() => {
+            setGameMode(SURVIVAL_MOD)
+            setStartGame(true)
+            playAgain()
+            setLife(maxLife)
+          }}>
+            <img src='https://cdn-icons-png.flaticon.com/512/3106/3106716.png' alt='restart' width='30' />
+          </button>
+          <button className={styles.menuBtn} onClick={returnMenu}>
+            <img src='https://cdn-icons-png.flaticon.com/512/659/659988.png'
+                 alt='menu' width='25' />
+          </button>
+        </div>
       </div>}
     </div>
   )
