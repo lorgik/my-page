@@ -12,7 +12,7 @@ const Header = () => {
       <nav>
         <ul>
           <li><NavLink className={setActive} to='/todo-list'>Дела</NavLink></li>
-          <li><NavLink className={setActive} to='/game'>Игра</NavLink></li>
+          <li><NavLink className={setActive} to='/'>Игра</NavLink></li>
           {/*<li><NavLink className={setActive} to='/contacts'>Контакты</NavLink></li>*/}
         </ul>
       </nav>
