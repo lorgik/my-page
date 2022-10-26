@@ -1,16 +1,19 @@
 .header {
-	background: #dedede;
-	border-radius: 20px;
+	border-radius: 15px;
 	margin-bottom: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 10px 50px 10px 30px;
+	padding: 10px;
 	box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+	background-color: rgba(255, 255, 255, .7);
+	backdrop-filter: blur(20px);
 	
+	> a {
+		margin-left: 20px;
+	}
 	
 	> nav {
-		
 		> ul {
 			display: flex;
 			gap: 50px;
@@ -19,37 +22,37 @@
 				
 				> a {
 					font-weight: 600;
+					position: relative;
+					padding-bottom: 4px;
 					
-					&.active {
-						position: relative;
-						z-index: 0;
-						animation: show 0.3s ease-in-out;
-						
-						
-						&:before {
-							position: absolute;
-							content: '';
-							width: 170%;
-							height: 170%;
-							border-radius: 10px;
-							background-color: #fff;
-							z-index: -1;
-							left: -35%;
-							top: -30%;
-							box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
-						}
-					}
+					//&::before {
+					//	position: absolute;
+					//	content: '';
+					//	height: 2px;
+					//	border-radius: 10px;
+					//	background-color: #282828;
+					//	left: 0;
+					//	right: 0;
+					//	bottom: 0;
+					//	box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+					//	transition: all .4s ease;
+					//}
+					//
+					//&:hover {
+					//	&::before {
+					//		left: 100%;
+					//	}
+					//}
 				}
 			}
 		}
 	}
 }
 
-@keyframes show {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
+.logo {
+	transition: transform .3s ease;
+	
+	&:hover {
+		transform: rotateZ(30deg);
 	}
 }

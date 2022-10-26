@@ -1,0 +1,26 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	height: inherit;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	flex: 1 0 auto;
+	
+	> div, > main {
+		flex: inherit;
+	}
+}
+
+.back {
+	z-index: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: inherit;
+	width: 100%;
+	object-fit: cover;
+	opacity: .8;
+}

@@ -1,4 +1,5 @@
 import styles from './Main.module.scss'
+import ListTodo from '../TodoList/ListTodo'
 
 
 const Main = () => {
@@ -12,7 +13,7 @@ const Main = () => {
         <p>API не грузит :(</p>
       </section>
       <aside>
-        <div>Затычка</div>
+        <ListTodo />
       </aside>
     </main>
   )

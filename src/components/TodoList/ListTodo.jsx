@@ -40,12 +40,12 @@ const ListTodo = () => {
         <form onSubmit={submitHandler}>
           <input type='text' placeholder='Напиши свою задачу' value={value}
                  onChange={(event) => setValue(event.target.value)} />
-          <button>Добавить</button>
+          <button className='bg-green-400'>Добавить</button>
         </form>
         <div className={styles.list}>
           {todos.map((todo, index) => (
             <p key={index}>{index + 1}. {todo}
-              <span onClick={() => deleteTodo(index)}>&#10008;</span>
+              <span onClick={() => deleteTodo(index)}>&#215;</span>
             </p>
           ))}
         </div>

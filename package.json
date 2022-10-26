@@ -2,12 +2,15 @@
   "name": "my-page",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://lorgik.github.io/my-page",
   "dependencies": {
     "@tanstack/react-query": "^4.3.9",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.2.0",
+    "@types/node": "^18.11.4",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "axios": "^0.27.2",
     "gh-pages": "^4.0.0",
     "react": "^18.2.0",
@@ -16,6 +19,7 @@
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "sass": "^1.55.0",
+    "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

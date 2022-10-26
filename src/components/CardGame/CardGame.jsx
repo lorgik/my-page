@@ -7,8 +7,9 @@ import SurvivalMode from './SurvivalMode/SurvivalMode'
 import DifficultySelection from './SurvivalMode/DifficultySelection/DifficultySelection'
 import GameOver from './GameOver/GameOver'
 
-const ARCADE_MOD = 'arcade'
-const SURVIVAL_MOD = 'survival'
+const ARCADE_MODE = 'arcade'
+const SURVIVAL_MODE = 'survival'
+const GAY_MODE = 'gay'
 
 const cardImages = [
   { 'src': 'https://cdn-icons-png.flaticon.com/512/3145/3145160.png', matched: false },
@@ -125,7 +126,7 @@ const CardGame = () => {
   
   const playAgainSurvival = () => {
     playAgain()
-    setGameMode(SURVIVAL_MOD)
+    setGameMode(SURVIVAL_MODE)
     setStartGame(true)
     setLife(maxLife)
   }
@@ -151,6 +152,12 @@ const CardGame = () => {
     setOpenPairs(0)
   }
   
+  const setDifficulty = (life) => {
+    setLife(life)
+    setMaxLife(life)
+    handleClickDifficult()
+  }
+  
   return (
     <div className={styles.cardGame}>
       {gameMode === '' && !startGame ?
@@ -159,39 +166,39 @@ const CardGame = () => {
         : ''
       }
       
-      {gameMode === ARCADE_MOD ? <>
-          {startGame ? <>
-              <ArcadeMode playAgain={playAgain} returnMenu={returnMenu} turns={turns} />
-              
-              <div className={styles.cards}>
-                {cards.map(card => (
-                  <SingleCard key={card.id} card={card} handleChoice={handleChoice}
-                              flipped={card === choiceOne || card === choiceTwo || card.matched} disabled={disabled}
-                              isPair={card.matched} isNotPair={!card.matched && choiceOne && choiceTwo} />
-                ))}
-              </div>
-            </>
-            : ''}
-        </>
-        : <>
-          {startGame ? <>
-            <SurvivalMode setLife={setLife} returnMenu={returnMenu} playAgain={playAgain}
-                          hearts={hearts} maxLife={maxLife} />
-            
-            <div className={styles.cards}>
-              {cards.map(card => (
-                <SingleCard key={card.id} card={card} handleChoice={handleChoice}
-                            flipped={card === choiceOne || card === choiceTwo || card.matched} disabled={disabled}
-                            isPair={card.matched} isNotPair={!card.matched && choiceOne && choiceTwo} />
-              ))}
-            </div>
-          </> : <>
-            {life === 100 ?
-              <DifficultySelection returnMenu={returnMenu} setMaxLife={setMaxLife}
-                                   handleClickDifficult={handleClickDifficult} setLife={setLife} />
-              : ''}
-          </>}
-        </>}
+      {(gameMode === ARCADE_MODE) && startGame ? <>
+        <ArcadeMode playAgain={playAgain} returnMenu={returnMenu} turns={turns} />
+        
+        <div className={styles.cards}>
+          {cards.map(card => (
+            <SingleCard key={card.id} card={card} handleChoice={handleChoice}
+                        flipped={card === choiceOne || card === choiceTwo || card.matched} disabled={disabled}
+                        isPair={card.matched} isNotPair={!card.matched && choiceOne && choiceTwo} />
+          ))}
+        </div>
+      </> : ''}
+      
+      {(gameMode === SURVIVAL_MODE) && startGame ? <>
+        <SurvivalMode returnMenu={returnMenu} playAgain={playAgainSurvival} hearts={hearts} />
+        
+        <div className={styles.cards}>
+          {cards.map(card => (
+            <SingleCard key={card.id} card={card} handleChoice={handleChoice}
+                        flipped={card === choiceOne || card === choiceTwo || card.matched} disabled={disabled}
+                        isPair={card.matched} isNotPair={!card.matched && choiceOne && choiceTwo} />
+          ))}
+        </div>
+      </> : <>
+        {life === 100 ?
+          <DifficultySelection returnMenu={returnMenu} setDifficulty={setDifficulty} />
+          : ''}
+      </>}
+      
+      {/*{(gameMode === GAY_MODE) && startGame ? <>*/}
+      {/*    <h1 className='text-9xl bg-white py-10 px-20 rounded-xl w-full'>ТЫ ПИДОР</h1>*/}
+      {/*  </>*/}
+      {/*  : ''}*/}
+      
       
       {
         ((openPairs === 8) && (life === -1)) &&
@@ -199,13 +206,28 @@ const CardGame = () => {
       }
       
       {
-        ((openPairs === 8) && (life !== -1)) &&
-        <GameOver text={`Вы просто победитель по жизни!`} returnMenu={returnMenu} playAgain={playAgainSurvival} />
+        ((openPairs === 8) && (life !== -1)) && (maxLife === 15) &&
+        <GameOver text={`Ты молодчина!!!`} returnMenu={returnMenu} playAgain={playAgainSurvival} />
+      }
+      
+      {
+        ((openPairs === 8) && (life !== -1)) && (maxLife === 10) &&
+        <GameOver text={`А ты не так прост!!!`} returnMenu={returnMenu} playAgain={playAgainSurvival} />
+      }
+      
+      {
+        ((openPairs === 8) && (life !== -1)) && (maxLife === 5) &&
+        <GameOver text={`Ты просто потрясен!!!`} returnMenu={returnMenu} playAgain={playAgainSurvival} />
+      }
+      
+      {
+        ((openPairs === 8) && (life !== -1)) && (maxLife === 3) &&
+        <GameOver text={`Ты просто бог этой игры!!!`} returnMenu={returnMenu} playAgain={playAgainSurvival} />
       }
       
       {
         (life === 0) &&
-        <GameOver text={`Вы профукали! ХА ХА ХА`} returnMenu={returnMenu} playAgain={playAgainSurvival} />
+        <GameOver text={`Вы профукали!!! ХА-ХА-ХА`} returnMenu={returnMenu} playAgain={playAgainSurvival} />
       }
     </div>
   )

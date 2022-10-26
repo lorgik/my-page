@@ -1,7 +1,8 @@
 import styles from '../CardGame.module.scss'
 
-const ARCADE_MOD = 'arcade'
-const SURVIVAL_MOD = 'survival'
+const ARCADE_MODE = 'arcade'
+const SURVIVAL_MODE = 'survival'
+const GAY_MODE = 'gay'
 
 const CardMenu = ({ shuffleCards, setGameMode, setStartGame, setLife }) => {
   return (
@@ -11,16 +12,22 @@ const CardMenu = ({ shuffleCards, setGameMode, setStartGame, setLife }) => {
         <button className='py-4 px-14 bg-blue-400 rounded text-2xl w-64'
                 onClick={() => {
                   shuffleCards()
-                  setGameMode(ARCADE_MOD)
+                  setGameMode(ARCADE_MODE)
                   setStartGame(true)
                 }}>АРКАДА
         </button>
         <button className='py-4 px-10 bg-violet-400 rounded text-2xl w-64'
                 onClick={() => {
                   setLife(100)
-                  setGameMode(SURVIVAL_MOD)
+                  setGameMode(SURVIVAL_MODE)
                 }}>ВЫЖИВАНИЕ
         </button>
+        {/*<button className='py-4 px-10 bg-emerald-400 rounded text-2xl'*/}
+        {/*        onClick={() => {*/}
+        {/*          setGameMode(GAY_MODE)*/}
+        {/*          setStartGame(true)*/}
+        {/*        }}>Соревновательный*/}
+        {/*</button>*/}
       </div>
     </div>
   )

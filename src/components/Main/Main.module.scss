@@ -6,11 +6,13 @@
 	
 	
 	> section {
-		background: #dedede;
 		border-radius: 20px;
 		padding: 20px;
 		margin-bottom: 20px;
 		box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+		background-color: rgba(255, 255, 255, .7);
+		backdrop-filter: blur(20px);
+		
 		
 		> img {
 			border-radius: 20px;
@@ -26,11 +28,12 @@
 	}
 	
 	> aside {
-		background: #dedede;
 		border-radius: 20px;
 		padding: 20px;
 		margin-bottom: 20px;
 		box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+		background-color: rgba(255, 255, 255, .7);
+		backdrop-filter: blur(20px);
 		
 	}
 	
