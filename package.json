@@ -2,6 +2,7 @@
   "name": "my-page",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://lorgik.github.io/my-page",
   "dependencies": {
     "@tanstack/react-query": "^4.3.9",
     "@testing-library/jest-dom": "^5.16.5",

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 const ListTodo = () => {
   const [value, setValue] = useState('')
   const [todos, setTodos] = useState(() => {
-    const saved = localStorage.getItem('todos')
+    const saved: any = localStorage.getItem('todos')
     const initialState = JSON.parse(saved)
     return initialState || ''
   })
@@ -15,17 +15,17 @@ const ListTodo = () => {
   }, [todos])
   
   
-  function addTodo(todoText) {
+  function addTodo(todoText: string) {
     setTodos([...todos, todoText])
     localStorage.setItem('todos', todos)
   }
   
-  function deleteTodo(todoIndex) {
-    const newTodos = todos.filter((_, index) => index !== todoIndex)
+  function deleteTodo(todoIndex: number) {
+    const newTodos = todos.filter((_: any, index: number) => index !== todoIndex)
     setTodos(newTodos)
   }
   
-  const submitHandler = (event) => {
+  const submitHandler = (event: any) => {
     event.preventDefault()
     if (value && (value.trim() !== '')) {
       addTodo(value)
@@ -43,7 +43,7 @@ const ListTodo = () => {
           <button className='bg-green-400'>Добавить</button>
         </form>
         <div className={styles.list}>
-          {todos.map((todo, index) => (
+          {todos.map((todo: any, index: any) => (
             <p key={index}>{index + 1}. {todo}
               <span onClick={() => deleteTodo(index)}>&#215;</span>
             </p>
