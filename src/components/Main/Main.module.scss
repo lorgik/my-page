@@ -98,24 +98,16 @@
 	
 	img {
 		width: 40px;
-		background-color: #eee;
-		border-radius: 8px;
-		padding: 5px;
-		box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
+	}
+	
+	.img {
+		background: #282828;
+		padding: 7px;
+		border-radius: 5px;
 	}
 	
 	.percent {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		min-width: 40px;
-		width: 40px;
-		height: 40px;
-		background-color: #eee;
-		border-radius: 8px;
-		padding: 5px;
 		font-size: 16px;
-		box-shadow: 0 10px 30px rgba(108, 108, 114, 0.2);
 	}
 }
 

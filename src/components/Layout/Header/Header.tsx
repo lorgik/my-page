@@ -1,6 +1,5 @@
 import styles from './Header.module.scss'
 import { NavLink } from 'react-router-dom'
-import Weather from '../../Weather/Weather'
 
 
 const Header = () => {
@@ -16,7 +15,7 @@ const Header = () => {
           {/*<li><NavLink to='/contacts'>Контакты</NavLink></li>*/}
         
         </ul>
-        <Weather />
+        {/*<Weather />*/}
       </nav>
     </header>
   )

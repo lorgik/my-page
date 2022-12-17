@@ -1,4 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
+import styles from './SnakeGame.module.scss'
+
+import hungryImage from '../../assets/images/snake-game/hungry.png'
+import foodImage from '../../assets/images/snake-game/food.png'
 
 const stepDelay = 150
 const fieldSize = 480
@@ -6,10 +10,10 @@ const creatureSize = 60
 const fieldWithCreature = fieldSize - creatureSize
 
 const img1 = new Image()
-img1.src = 'https://cdn-icons-png.flaticon.com/512/2072/2072299.png'
+img1.src = hungryImage
 
 const img2 = new Image()
-img2.src = 'https://cdn-icons-png.flaticon.com/512/1791/1791327.png'
+img2.src = foodImage
 
 const SnakeGame = () => {
   const [snakePositionX, setSnakePositionX] = useState(0)
@@ -24,19 +28,17 @@ const SnakeGame = () => {
   
   const canvas = useRef<any>()
   
-  
   function updateCanvas() {
-    const context = canvas.current.getContext('2d')
-    
     if (start) {
+      const context = canvas.current.getContext('2d')
       context.clearRect(0, 0, fieldSize, fieldSize)
       
       if (snakePositionX === foodPositionX && snakePositionY === foodPositionY) {
         setFoodRandomPosition()
       }
-      context.drawImage(img1, foodPositionX, foodPositionY, creatureSize, creatureSize)
+      context.drawImage(img2, foodPositionX, foodPositionY, creatureSize, creatureSize)
       
-      context.drawImage(img2, snakePositionX, snakePositionY, creatureSize, creatureSize)
+      context.drawImage(img1, snakePositionX, snakePositionY, creatureSize, creatureSize)
       
       switch (direction) {
         case 'right':
@@ -140,8 +142,8 @@ const SnakeGame = () => {
   
   
   return (
-    <div onClick={focusCanvas} className='w-full mb-5 flex items-center justify-evenly z-10'>
-      <canvas tabIndex={0} onKeyDown={handleKeyDown} className='bg-gray-200 border-gray-900 outline-none'
+    <div onClick={focusCanvas} className={styles.game}>
+      <canvas tabIndex={0} onKeyDown={handleKeyDown} className={styles.canvas}
               ref={canvas}
               width={fieldSize} height={fieldSize} />
       <p className='max-w-[270px] w-full text-3xl bg-white px-4 py-3 rounded-lg flex justify-between'>
